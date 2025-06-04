@@ -1,0 +1,194 @@
+@font-face {
+    font-family: 'Space Mono';
+    src: url('../fonts/SpaceMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('../fonts/SpaceMono-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('../fonts/SpaceMono-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('../fonts/SpaceMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-LightItalic.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+body {
+    background: #FFFFFF; 
+    color: #23282d; 
+    font-family: 'Space Mono', monospace;
+    margin: 0; 
+    padding: 0;
+}
+
+ul li {
+    display: inline-block;
+}
+
+#header, #footer {
+    display: flex;
+    background-color: #ffffff;
+    text-align: center;
+    align-items: center;
+}
+
+#header {
+    height: 80px;
+    justify-content: space-between;
+    padding: 0 145px;
+}
+
+#footer {
+    justify-content: center;
+    border-top: 1px solid #000000;
+    height: 40px;
+}
+
+#header a, #footer a {
+    color: #000000; 
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center; 
+    text-transform: uppercase;
+    padding: 50px 0;
+}
+
+#header li {
+    padding: 0 20px; 
+    font-weight: 700;
+}
+
+#footer li {
+    padding: 0 40px; 
+    font-weight: 700;
+}
+
+/* BOUTON */ 
+
+.hidden{
+    visibility: hidden;
+    display: none;
+}
+
+.popup-overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 0, 0.566);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    top:0;
+    left:0;
+}
+
+.popup-contact{
+    position:relative;
+    background:white;
+    max-width:600px;
+    width:80%;
+    padding:15px 0;
+    border: 5px solid #000000;
+    margin-top: 50px;
+}
+
+.popup-close{
+    width:100%;
+}
+
+.popup-title {
+    background-image: url("../images/contact.png");
+    background-repeat : repeat;
+    overflow : hidden;
+    margin-bottom: 22px;
+    width:100%;
+}
+
+.popup-informations {    
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 25px 45px 60px;
+}
+
+.wpcf7-form p {
+    padding-top: 25px;
+    width: 90%;
+}
+
+.wpcf7-form p label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.wpcf7-form p input {
+    height: 40px;
+}
+
+.wpcf7-form p .wpcf7-text, .wpcf7-form p .wpcf7-email, .wpcf7-form p textarea {
+    width: 100%;
+    border-radius: 0px;
+    border: 1px solid #000000;
+}
+
+.wpcf7-form p .wpcf7-submit {     
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    width: 75%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin: auto;
+}
