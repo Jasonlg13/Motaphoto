@@ -1,6 +1,10 @@
 (function ($) {
   $(".contact_btn").click(function () {
-    $(".popup-overlay").toggleClass("hidden");
+    $("#popup-menu").toggleClass("hidden");
+    listenclose();
+  });
+   $(".texte-contact").click(function () {
+    $("#popup-single").toggleClass("hidden");
     listenclose();
   });
 })(jQuery);

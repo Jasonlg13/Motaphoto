@@ -1,4 +1,4 @@
-<div class="popup-overlay hidden">
+<div id="popup-menu" class="popup-overlay hidden">
 	<div class="popup-contact">
 		<div class="popup-title">
 			<img src="<?php echo get_template_directory_uri(); ?>/assets/images/contact.png"

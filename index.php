@@ -1,5 +1,14 @@
-<?php get_header(); ?>
+<?php
+get_header();
+?>
+
 <main>
   <h1>Bienvenue sur le site de Nathalie Mota</h1>
 </main>
-<?php get_footer(); ?>
+
+<div>
+    <?php include get_template_directory() . '/template_parts/photo_block.php'; ?>
+</div>
+
+<?php get_footer();
+
