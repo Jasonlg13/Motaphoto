@@ -8,16 +8,16 @@ get_header();
             <div class="left-contenu">
                 <h1><?php the_title(); ?></h1>
                 <?php
-                $reference = get_field('reference'); 
+                $reference = get_field('reference'); /*Je récupère la référence*/
                 if ($reference) {
-                    echo '<p>Référence : ' . esc_html($reference) . '</p>';
+                    echo '<p>Référence : ' . esc_html($reference) . '</p>'; /*Je l'affiche avec un paragraphe Référence accompagné de la $reference*/
                 }
 
                 $categorie_photo = get_the_terms(get_the_ID(), 'categorie_photo');
                 $current_category_slugs = array();
                 if ($categorie_photo) {
                     foreach ($categorie_photo as $category) {
-                        $current_category_slugs[] = $category->slug; 
+                        $current_category_slugs[] = $category->slug; /*Parcourt les catégories et je récupère l'identifiant de la catégorie*/
                     }
                 }
 
@@ -67,6 +67,17 @@ get_header();
     <div class="left-contact">
         <div class="texte-contact">
             <p>Cette photo vous intéresse ?</p>
+        </div>
+              <div class="bouton-contact">
+            <?php include get_template_directory() . '/template_parts/contact-photo.php'; ?>
+            <?php
+            $reference = get_field('reference');
+            if ($reference) {
+                echo '<script type="text/javascript">';
+                echo 'const acfReferencePhoto = "' . esc_js($reference) . '";';
+                echo '</script>';
+            }
+            ?>
         </div>
     </div>
     <div class="right-contact">
@@ -160,32 +171,6 @@ get_header();
 
         <?php wp_reset_postdata(); ?>
     </div>
-</div>
-
-<div id="popup-single" class="popup-overlay hidden">
-	<div class="popup-contact">
-		<div class="popup-title">
-			<img src="<?php echo get_template_directory_uri(); ?>/assets/images/contact.png"
-			alt="Contact <?php echo bloginfo('contact'); ?>">
-			<div class="popup-title"></div>
-			<div class="popup-title"></div>
-		</div>
-		<div class="popup-informations">	
-			<?php
-				echo do_shortcode('[contact-form-7 id="8f49349" title="Contact-Single"]');
-			?>
-              <?php
-            $reference = get_field('reference');
-            if ($reference) {
-                ?>
-                <script type="text/javascript">
-                document.querySelector ("input[name='your-subject']").value= "<?php echo $reference; ?>";
-                </script>
-                <?php
-            }
-            ?>
-		</div>	
-	</div>
 </div>
 
 </main>

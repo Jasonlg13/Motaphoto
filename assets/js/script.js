@@ -1,26 +1,34 @@
 (function ($) {
-  $(".contact_btn").click(function () {
-    $("#popup-menu").toggleClass("hidden");
-    listenclose();
+
+ //Photo Contact//
+
+  $("#button-photo").on("click", function () {
+    $("#popup-single").removeClass("hidden");
   });
-   $(".texte-contact").click(function () {
-    $("#popup-single").toggleClass("hidden");
-    listenclose();
+  
+  $(".close-photo").on("click", function () {
+    $("#popup-single").addClass("hidden");
   });
-})(jQuery);
 
-function listenclose() {
-  return;
-  // Add click listener to document to handle clicks outside .popup-contact
-  document.addEventListener('click', function(event) {
-    // Check if clicked element or its parents have popup-contact class
-    if (!event.target.closest('.popup-contact')) {
-
-      const popupModal = document.querySelector('.popup-overlay');
-      if (popupModal && !popupModal.classList.contains('hidden')) {
-        popupModal.classList.add('hidden');
-      }
-
+  $("#popup-single").on("click", function (e) {
+    if ($(e.target).is("#popup-single")) {
+      $("#popup-single").addClass("hidden");
     }
   });
-}
+
+  //Menu Contact//
+  
+  $(".contact_btn").on("click", function (e) {
+    $("#popup-menu").removeClass("hidden");
+  });
+
+    $(".close-contact").on("click", function () {
+    $("#popup-menu").addClass("hidden");
+  });
+
+    $("#popup-menu").on("click", function (e) {
+    if ($(e.target).is("#popup-menu")) {
+      $("#popup-menu").addClass("hidden");
+    }
+  });
+})(jQuery);

@@ -1,9 +1,12 @@
 <div class="custom-post-thumbnails">
+    <input type="hidden" name="page" value="1">
     <div class="thumbnail-container-accueil">
         <?php
         $args_custom_posts = array(
             'post_type' => 'photo',
             'posts_per_page' => 12,
+            'orderby' => 'date',
+            'order' => 'DESC', 
         );
 
         $custom_posts_query = new WP_Query($args_custom_posts);
@@ -18,7 +21,7 @@
                         <a href="<?php the_permalink(); ?>">
                             <?php the_post_thumbnail(); ?>
                             <div class="thumbnail-overlay">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Eye Icon">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Icone Oeil">
                                 <i class="fas fa-expand-arrows-alt fullscreen-icon"></i>
                                 <?php
                                 $related_reference = get_field('reference');
