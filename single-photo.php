@@ -2,6 +2,24 @@
 get_header();
 ?>
 
+<!-- Section | Lightbox Photo -->
+<div class='modal-container'>
+    <!-- Bouton fermer -->
+    <span class="btn-close">X</span>
+    <!-- Fleche -->
+    <div class="left-arrow"></div>
+    <div>
+        <!-- Image | Information de la Photo -->
+        <img src="" class="middle-image" />
+        <div class="info-photo">
+            <span id="modal-reference"></span>
+            <span id="modal-category"></span>
+        </div>
+    </div>
+    <!-- Fleche -->
+    <div class="right-arrow"></div>
+</div>
+
 <main id="main" class="content-area">
     <div class="zone-contenu">
         <div class="left-container">
@@ -56,11 +74,22 @@ get_header();
             </div>
         </div>
         <div class="right-container">
-            <?php if (has_post_thumbnail()) : ?>
-                <a href="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(), 'large')[0]; ?>" class="photo">
-                    <?php the_post_thumbnail(); ?>
-                </a>
-            <?php endif; ?>
+            <?php while (have_posts()) : the_post();
+                $reference = get_field('reference');
+                $categories = get_the_terms(get_the_ID(), 'categorie_photo');
+                $category_string = $categories ? implode(', ', wp_list_pluck($categories, 'name')) : '';
+                $img_large_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large')[0];
+            ?>
+                <?php if (has_post_thumbnail()) : ?>
+                    <a href="#" class="photo" 
+                    data-href="<?php echo esc_url($img_large_url); ?>" 
+                    data-reference="<?php echo esc_attr($reference); ?>" 
+                    data-category="<?php echo esc_attr($category_string); ?>">
+                        <?php the_post_thumbnail('full'); ?>
+                    </a>
+                    <i class="fas fa-expand-arrows-alt fullscreen-icon"></i>
+                <?php endif; ?>
+            <?php endwhile; ?>
         </div>
     </div>
     <div class="zone-contact">
@@ -100,14 +129,14 @@ get_header();
         $next_thumbnail = get_the_post_thumbnail($next_post, 'thumbnail');
         ?>
 
-        <div class="thumbnail-container">
-            <div class="thumbnail-wrapper">
+        <div class="thumbnail-navigation">                   
+            <div class="thumbnail-preview" id="thumbnail-preview">
+                <img src="<?php echo esc_url(get_the_post_thumbnail_url($next_post, 'thumbnail')); ?>" alt="Miniature" />
             </div>
-            <a href="<?php echo esc_url($prev_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($prev_post, 'thumbnail')); ?>" id="prev-arrow-link">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-gauche.png" alt="Précédent" class="arrow-img-gauche" id="prev-arrow" />
-            </a>
-            <a href="<?php echo esc_url($next_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($next_post, 'thumbnail')); ?>" id="next-arrow-link">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-droite.png" alt="Suivant" class="arrow-img-droite" id="next-arrow" />
+            <a href="<?php echo esc_url($prev_permalink); ?>" class="arrow-link" id="prev-arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($prev_post, 'thumbnail')); ?>">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-gauche.png" alt="Précédent" class="arrow-img" /></a>
+            <a href="<?php echo esc_url($next_permalink); ?>" class="arrow-link" id="next-arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($next_post, 'thumbnail')); ?>">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-droite.png" alt="Suivant" class="arrow-img" />
             </a>
         </div>
     </div>
@@ -120,7 +149,8 @@ get_header();
         $args_related_photos = array(
             'post_type' => 'photo',
             'posts_per_page' => 2,
-            'orderby' => 'rand', /* récupère aléatoirement deux photo */
+            'orderby' => 'rand', // récupère aléatoirement deux photos
+            'post__not_in' => array(get_the_ID()), // exclut la photo en cours
             'tax_query' => array(
                 array(
                     'taxonomy' => 'categorie_photo',
@@ -174,5 +204,32 @@ get_header();
 </div>
 
 </main>
+
+<script> // Finir le « précédent / suivant » sur le template single (miniatures)
+document.addEventListener('DOMContentLoaded', function () {
+    const preview = document.getElementById('thumbnail-preview').querySelector('img');
+    const prevLink = document.getElementById('prev-arrow-link');
+    const nextLink = document.getElementById('next-arrow-link');
+
+    const originalThumbnail = preview.src;
+
+    prevLink.addEventListener('mouseenter', () => {
+        preview.src = prevLink.dataset.thumbnail;
+    });
+
+    nextLink.addEventListener('mouseenter', () => {
+        preview.src = nextLink.dataset.thumbnail;
+    });
+
+    prevLink.addEventListener('mouseleave', () => {
+        preview.src = originalThumbnail;
+    });
+
+    nextLink.addEventListener('mouseleave', () => {
+        preview.src = originalThumbnail;
+    });
+});
+</script>
+
 
 <?php get_footer(); ?>

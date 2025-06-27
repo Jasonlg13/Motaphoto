@@ -193,7 +193,7 @@ ul li {
   background-position: center;
   height: 100%;
   position: relative;
-  background-image: url("/assets/images/fallback-hero.png");
+  background-image: url("../images/fallback-hero.png");
 }
 
 .hero-image img {
@@ -660,7 +660,7 @@ ul li {
 }
 
 .modal-container {
-  display: none;
+  display: none !important;
   position: fixed;
   top: 0;
   left: 0;
@@ -676,7 +676,7 @@ ul li {
 
 .modal-container.opened {
   opacity: 1;
-  display: flex;
+  display: flex !important;
 }
 
 .modal-container img {
@@ -716,7 +716,7 @@ ul li {
   font-weight: 400;
   line-height: 21px;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 
 .modal-container a {
@@ -728,11 +728,55 @@ ul li {
   font-weight: 400;
 }
 
-#load-more-posts:hover {
-  color: #ffffff; /* Couleur du texte en survol */
-  background-color: #000000; /* Couleur d'arrière-plan - Survol */
+/* Appliquer des styles spécifiques aux appareils mobiles dans une requête media */
+@media (max-width: 768px) {
+  .btn-close {
+    font-size: 18px;
+    padding: 20px;
+    right: 20px;
+    top: 10px;
+  }
+  .modal-container {
+    padding: 1px;
+    z-index: 1000; /* Ajuster selon les besoins */
+    background: rgba(0, 0, 0, 0.8); /* Légèrement plus transparent */
+  }
+  .modal-container img {
+    max-height: 60vh; /* Ajuster selon les besoins */
+    width: auto; /* Maintenir le rapport d'aspect */
+  }
+  .left-arrow > a > span,
+  .right-arrow > a > span {
+    display: none;
+  }
+  .left-arrow {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Positionner la flèche de gauche à gauche */
+    transform: translateY(-50%); /* Centrer verticalement la flèche */
+  }
+  .right-arrow {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Positionner la flèche de droite à droite */
+    transform: translateY(-50%); /* Centrer verticalement la flèche */
+  }
+  .info-photo {
+    display: flex;
+    flex-direction: column; /* Empiler les éléments verticalement sur mobile */
+    align-items: center; /* Centrer les éléments horizontalement */
+  }
+  .info-photo > span {
+    padding: 10px;
+    font-size: 14px;
+  }
 }
-
 /* Filtres */
 .filters-and-sort {
   max-width: 1126px; /* Largeur maximale - Section Filtres */
@@ -755,11 +799,29 @@ ul li {
 #category-filter,
 #format-filter,
 #date-sort {
-  width: 260px; /* Largeur Filtres */
-  height: 42px; /* Hauteur Filtres */
-  padding: 11px 18px 11px 18px; /* Marge intérieure Filtres */
+  width: 260px;
+  height: 42px;
+  padding: 11px 18px 11px 18px;
   margin-bottom: 20px;
-  border-radius: 8px; /* Coins Filtres */
-  border: 1.3px solid #B8BBC2; /* Bordure solide */
   justify-content: space-between;
+}
+
+.thumbnail-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.arrow-link img.arrow-img {
+  width: 32px;
+  height: auto;
+  cursor: pointer;
+}
+
+.thumbnail-preview img {
+  width: 80px;
+  height: auto;
+  margin-left: 7%;
 }/*# sourceMappingURL=front.css.map */
